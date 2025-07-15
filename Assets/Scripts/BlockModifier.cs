@@ -2,10 +2,12 @@ using UnityEngine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-public class BlockModifier : MonoBehaviour
+public abstract class BlockModifier : MonoBehaviour
 {
-     public void ActivateModifier()
-    {
-        
-    }
+    public string modifierName = "Default Modifier";
+
+    public abstract void ActivateModifier();
+    
+    
+    
 }
