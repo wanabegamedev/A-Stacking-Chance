@@ -7,13 +7,24 @@ public class Block : MonoBehaviour
 {
     public string blockName;
 
-    public string blockScoreValue;
+    public int blockScoreValue;
   
   [SerializeField] private List<BlockModifier> onMoveModifierList;
   [SerializeField] private List<BlockModifier> onTurnStartModifierList;
   [SerializeField] private List<BlockModifier> onTurnEndModifierList;
   [SerializeField] private List<BlockModifier> onRemoveModifierList;
-  
+
+
+  private GameManager manager;
+  private Rigidbody rigid;
+
+  public bool selected;
+
+  private void Awake()
+  {
+      rigid = GetComponent<Rigidbody>();
+      manager = FindAnyObjectByType<GameManager>();
+  }
 
 
   public void ActivateTurnStartModifiers()
@@ -49,5 +60,18 @@ public class Block : MonoBehaviour
       }
   }
 
-  
+  private void OnMouseUp()
+  {
+      
+      selected = manager.SelectBlock(this);
+
+      if (selected)
+      {
+          rigid.useGravity = false;
+      }
+      else
+      {
+          rigid.useGravity = true;
+      }
+  }
 }

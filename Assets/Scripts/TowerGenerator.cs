@@ -67,7 +67,6 @@ public class TowerGenerator : MonoBehaviour
             
             
             yOffset += blockHeight;
-            print(yOffset);
             xOffset = 0;
 
 

@@ -6,7 +6,7 @@ public class CameraPivot : MonoBehaviour
     [SerializeField] private float orbitRadius = 5f;
 
     [SerializeField] private float minimumOrbitRadius = 2;
-    [SerializeField] private float maximumOrbitRadius = 20;
+    [SerializeField] private float maximumOrbitRadius = 200;
 
     [SerializeField] private float orbitSensitivity = 5;
     private bool orbitActive = true;
