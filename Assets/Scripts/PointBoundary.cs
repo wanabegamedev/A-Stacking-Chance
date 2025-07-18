@@ -7,12 +7,14 @@ public class PointBoundary : MonoBehaviour
     private GameManager manager;
 
     [SerializeField] private float gracePeriodTime = 5;
+    
+    public float timePassed = 0f;
 
-    private bool gracePeriodActive = false;
+    public bool gracePeriodActive = false;
 
     private int blocksOut = 0;
 
-    private int gracePeriodScoreHolder = 0;
+    public int gracePeriodScoreHolder = 0;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,7 +64,7 @@ public class PointBoundary : MonoBehaviour
     IEnumerator StartPieceRemovalGracePeriod()
     {
         gracePeriodActive = true;
-        float timePassed = 0f;
+    
 
         var lastNumberOfBlocksOut = blocksOut;
         
@@ -97,6 +99,8 @@ public class PointBoundary : MonoBehaviour
         manager.AddToScore(gracePeriodScoreHolder);
 
         gracePeriodScoreHolder = 0;
+
+        timePassed = 0;
         
         manager.TurnEnd();
         yield return null;

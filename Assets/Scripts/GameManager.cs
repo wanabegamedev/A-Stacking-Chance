@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class GameManager : MonoBehaviour
     [Header("Game State Variables")]
     public int pickupCount = 1;
     
-    public int round = 0;
+    public int round = 1;
     
     public int turn = 0;
     
@@ -18,21 +19,25 @@ public class GameManager : MonoBehaviour
     public List<Block> selectedBlocks = new();
 
 
-    [SerializeField] private int scoreUntilNextRound = 100;
+   public int scoreUntilNextRound = 100;
 
 
+   private TowerGenerator generator;
 
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        generator = FindAnyObjectByType<TowerGenerator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (score >= scoreUntilNextRound)
+        {
+            EndRound();
+        }
     }
 
     public bool SelectBlock(Block selectedBlock)
@@ -82,6 +87,29 @@ public class GameManager : MonoBehaviour
     public void AddToScore(int amount)
     {
         score += amount * scoreMultiplier;
+    }
+
+
+
+    public void EndGame()
+    {
+        print("Game Over");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void EndRound()
+    {
+        score = 0;
+        scoreUntilNextRound = scoreUntilNextRound * 2;
+
+        turn = 0;
+        round += 1;
+
+        //Reset tower
+        generator.ResetTower();
+        
+        generator.GenerateTower(10 * round);
+        
     }
 }
 

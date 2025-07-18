@@ -21,6 +21,7 @@ public class CameraPivot : MonoBehaviour
     {
         yaw = transform.eulerAngles.y;
         pitch = transform.eulerAngles.x;
+        OrbitPoint();
     }
 
     // Update is called once per frame
@@ -30,14 +31,24 @@ public class CameraPivot : MonoBehaviour
         {
             if (Input.GetMouseButton(0))
             {
-                OrbitPoint();
+               RotatePoint();
             }
-          
+         
+            orbitRadius -= Input.mouseScrollDelta.y * orbitSensitivity;
+            orbitRadius = Mathf.Clamp(orbitRadius, minimumOrbitRadius, maximumOrbitRadius);
+            
+            OrbitPoint();
         }
     }
 
 
     void OrbitPoint()
+    {
+
+        transform.position = lookAtPoint.position - transform.forward * orbitRadius;
+    }
+
+    void RotatePoint()
     {
         var mouseX = Input.GetAxis("Mouse X");
         var mouseY = Input.GetAxis("Mouse Y");
@@ -47,14 +58,6 @@ public class CameraPivot : MonoBehaviour
         pitch += mouseY * orbitSensitivity;
 
         transform.rotation = Quaternion.Euler(pitch, yaw, 0);
-        
-        
-
-        orbitRadius -= Input.mouseScrollDelta.y / orbitSensitivity;
-
-        orbitRadius = Mathf.Clamp(orbitRadius, minimumOrbitRadius, maximumOrbitRadius);
-
-        transform.position = lookAtPoint.position - transform.forward * orbitRadius;
 
     }
 }

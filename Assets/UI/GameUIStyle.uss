@@ -1,0 +1,27 @@
+VisualElement {
+}
+
+.score {
+    -unity-font-style: bold;
+    -unity-text-align: upper-center;
+    justify-content: flex-start;
+    top: 50px;
+}
+
+.progressBar {
+    -unity-font-style: bold;
+    align-items: auto;
+    -unity-text-align: upper-center;
+    bottom: 20px;
+}
+
+.multiplier {
+    -unity-text-align: upper-center;
+    -unity-font-style: bold-and-italic;
+}
+
+.unity-label:hover {
+    font-size: 20px;
+    -unity-font-style: bold;
+    color: rgb(255, 255, 255);
+}

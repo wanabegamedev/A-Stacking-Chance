@@ -32,7 +32,7 @@ public class TowerGenerator : MonoBehaviour
         
     }
 
-    void GenerateTower(int height)
+    public void GenerateTower(int height)
     {
     
         //height
@@ -43,19 +43,22 @@ public class TowerGenerator : MonoBehaviour
             {
                 var blockToInstantiate = SelectBlock();
                 var block = Instantiate(blockToInstantiate);
+                
                 //if it is a rotated layer, rotate the block
                 if (rotatedLayer)
                 {
 
                     //for some reason requires manual offset by width
-                    block.transform.localRotation = Quaternion.Euler(0, 90, 0);
-                    block.transform.localPosition = new Vector3(2, yOffset , xOffset - 2);
+                    block.transform.rotation = Quaternion.Euler(0, 90, 0);
+                    block.transform.position = new Vector3(2, yOffset , xOffset - 2);
                 }
                 else
                 {
-                     block.transform.localPosition = new Vector3(xOffset, yOffset, 0);
+                     block.transform.position = new Vector3(xOffset, yOffset, 0);
                  
                 }
+
+                block.parent = transform;
 
                 xOffset += 2;
                 
@@ -72,8 +75,11 @@ public class TowerGenerator : MonoBehaviour
 
 
         }
-  
-        
+
+        xOffset = 0;
+        yOffset = 0;
+
+
     }
 
 
@@ -84,5 +90,15 @@ public class TowerGenerator : MonoBehaviour
         var selectedBlock = blockTypes[randNumber];
 
         return selectedBlock.transform;
+    }
+
+
+   public void ResetTower()
+    {
+        //Destroy tower
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Destroy(transform.GetChild(i).gameObject);
+        }
     }
 }
