@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         generator = FindAnyObjectByType<TowerGenerator>();
+        StartTurn();
     }
 
     // Update is called once per frame
@@ -81,6 +82,17 @@ public class GameManager : MonoBehaviour
 
         //reset the selected blocks
         selectedBlocks = new List<Block>();
+        
+        StartTurn();
+        
+    }
+
+    void StartTurn()
+    {
+        for (int i = 0; i < generator.transform.childCount; i++)
+        {
+           generator.transform.GetChild(i).GetComponent<Block>().ActivateTurnStartModifiers();
+        }
     }
 
 

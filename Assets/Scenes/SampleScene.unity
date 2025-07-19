@@ -238,6 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gracePeriodTime: 2.5
+  timePassed: 0
   gracePeriodActive: 0
   gracePeriodScoreHolder: 0
 --- !u!1 &330585543
@@ -427,6 +428,8 @@ MonoBehaviour:
   towerHeight: 10
   blockTypes:
   - {fileID: 5753899359301297925, guid: 86079765581fc7d48aa3e56e77d9c6bb, type: 3}
+  - {fileID: 5753899359301297925, guid: 47dc555ca6391cc48ac66e9d2fb75e95, type: 3}
+  - {fileID: 5753899359301297925, guid: e31ef1241a89d994090ed0e726a46abd, type: 3}
   rotatedLayer: 0
   blockWidth: 5
   blockHeight: 1

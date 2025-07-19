@@ -9,14 +9,15 @@ public class Block : MonoBehaviour
 
     public int blockScoreValue;
   
-  [SerializeField] private List<BlockModifier> onMoveModifierList;
-  [SerializeField] private List<BlockModifier> onTurnStartModifierList;
-  [SerializeField] private List<BlockModifier> onTurnEndModifierList;
-  [SerializeField] private List<BlockModifier> onRemoveModifierList;
+  public List<BlockModifier> onMoveModifierList;
+  public List<BlockModifier> onTurnStartModifierList;
+  public List<BlockModifier> onTurnEndModifierList;
+  public List<BlockModifier> onRemoveModifierList;
 
 
   private GameManager manager;
   private Rigidbody rigid;
+  private MeshRenderer renderer;
 
   public bool selected;
 
@@ -24,6 +25,7 @@ public class Block : MonoBehaviour
   {
       rigid = GetComponent<Rigidbody>();
       manager = FindAnyObjectByType<GameManager>();
+      renderer = GetComponent<MeshRenderer>();
   }
 
 
@@ -46,6 +48,7 @@ public class Block : MonoBehaviour
   
   public void ActivateMoveModifiers()
   {
+    
       foreach (var modifier in onMoveModifierList)
       {
           modifier.ActivateModifier();
@@ -63,15 +66,19 @@ public class Block : MonoBehaviour
   private void OnMouseUp()
   {
       
+      
       selected = manager.SelectBlock(this);
+      
 
       if (selected)
       {
           rigid.useGravity = false;
+          renderer.material.color -= new Color(0, 0, 0, 0.7f);
       }
       else
       {
           rigid.useGravity = true;
+          renderer.material.color += new Color(0, 0, 0, 0.7f);
       }
   }
 }

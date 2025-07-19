@@ -23,11 +23,17 @@ public class BlockMovement : MonoBehaviour
         var xAxis = Input.GetAxis("Horizontal");
         var zAxis = Input.GetAxis("Vertical");
 
-        Vector3 direction = new Vector3(xAxis * Time.deltaTime * movementSpeed, 0, zAxis * Time.deltaTime * movementSpeed);
-
-        foreach (var block in manager.selectedBlocks)
+        if (xAxis != 0 || zAxis != 0)
         {
-            block.transform.position += direction;
+            Vector3 direction = new Vector3(xAxis * Time.deltaTime * movementSpeed, 0, zAxis * Time.deltaTime * movementSpeed);
+
+            foreach (var block in manager.selectedBlocks)
+            {
+                block.ActivateMoveModifiers();
+                block.transform.position += direction;
+            }
         }
+
+      
     }
 }
