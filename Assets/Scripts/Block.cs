@@ -14,6 +14,8 @@ public class Block : MonoBehaviour
   public List<BlockModifier> onTurnEndModifierList;
   public List<BlockModifier> onRemoveModifierList;
 
+  public bool blockLocked = false;
+
 
   private GameManager manager;
   private Rigidbody rigid;
@@ -65,7 +67,10 @@ public class Block : MonoBehaviour
 
   private void OnMouseUp()
   {
-      
+      if (blockLocked)
+      {
+          return;
+      }
       
       selected = manager.SelectBlock(this);
       

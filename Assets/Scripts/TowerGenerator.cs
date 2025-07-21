@@ -26,11 +26,6 @@ public class TowerGenerator : MonoBehaviour
         GenerateTower(towerHeight);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void GenerateTower(int height)
     {
@@ -56,6 +51,11 @@ public class TowerGenerator : MonoBehaviour
                 {
                      block.transform.position = new Vector3(xOffset, yOffset, 0);
                  
+                }
+
+                if (h == height - 1)
+                {
+                    block.GetComponent<Block>().blockLocked = true;
                 }
 
                 block.parent = transform;
