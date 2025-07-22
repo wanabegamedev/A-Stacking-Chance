@@ -1,15 +1,25 @@
+
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
+using Button = UnityEngine.UI.Button;
 
 public class UIManager : MonoBehaviour
 {
    [SerializeField] private UIDocument gameUI;
+   [SerializeField] private UIDocument upgradeUI;
    
    private GameManager manager;
 
-   private PointBoundary boundary;
+   private PointBoundary boundary; 
 
    private VisualElement rootElement;
+
+   private VisualElement upgradeRootElement;
+
+   
    
    private Label score;
    private Label progressBar;
@@ -33,6 +43,9 @@ public class UIManager : MonoBehaviour
         timer = rootElement.Q("timer-ui");
 
         timerText = timer.Q("timer-text") as Label;
+        
+        upgradeRootElement = upgradeUI.rootVisualElement.Q("card-holder");
+        upgradeUI.rootVisualElement.visible = false;
 
     }
 
@@ -61,8 +74,34 @@ public class UIManager : MonoBehaviour
 
     }
 
-    void DisplayUpgradeUI()
+    public void DisplayUpgradeUI()
     {
+        //uses the root element to make sure no upgrade UI is displayed
+        upgradeUI.rootVisualElement.visible = true;
+       
+        var selectionCards = upgradeRootElement.Query<VisualElement>("selection").ToList();
+        
+        List<Upgrade> selectedUpgrades = manager.SelectUpgrades();
+
+        var increment = 0;
+
+        foreach (var upgrade in selectedUpgrades)
+        {
+            //Get selection and assosiated child elements
+            var root = selectionCards[increment];
+
+            var title = root.Q("title") as Label;
+            var description =  root.Q("description") as Label;
+            var image = root.Q("image");
+
+
+            title.text = upgrade.upgradeName;
+            description.text = upgrade.upgradeDesc;
+            
+
+        }
+        
+        
         
     }
 }

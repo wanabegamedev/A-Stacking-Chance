@@ -29,11 +29,14 @@ public class GameManager : MonoBehaviour
 
    public List<Upgrade> availableUpgrades;
 
+   private UIManager uiManager;
+
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         generator = FindAnyObjectByType<TowerGenerator>();
+        uiManager = FindAnyObjectByType<UIManager>();
         StartTurn();
     }
 
@@ -125,7 +128,7 @@ public class GameManager : MonoBehaviour
         
         //Load upgrade UI
         
-        
+        uiManager.DisplayUpgradeUI();
         
 
         //Reset tower
@@ -147,8 +150,9 @@ public class GameManager : MonoBehaviour
         {
             var rand = Random.Range(0, availableUpgrades.Count);
             selectedUpgrades.Add(availableUpgrades[rand]);
+           
 
-         
+
         }
         
         return selectedUpgrades;
