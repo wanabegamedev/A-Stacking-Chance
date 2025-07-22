@@ -10,13 +10,19 @@ public class FireSpread : BlockModifier
     public int lifeSpan = 3;
 
     private MeshRenderer renderer;
-    private readonly int baseColor = Shader.PropertyToID("_BaseColor");
+    private readonly int lavaIntensity = Shader.PropertyToID("_Lava_Factor");
+    private Material lavaMat;
 
     private void OnEnable()
     {
+        //we always need to make sure to assign the lava material when setting up the modifier
+        lavaMat = renderer.material;
+        
+        
         renderer = GetComponent<MeshRenderer>();
         
-        renderer.material.SetColor(baseColor, Color.red);
+       
+        renderer.material.SetFloat(lavaIntensity, 2);
 
     }
 
@@ -36,14 +42,17 @@ public class FireSpread : BlockModifier
            FireSpread addedFireSpread =  block.gameObject.AddComponent(typeof(FireSpread)) as FireSpread;
            
            block.GetComponent<Block>().onTurnStartModifierList.Add(addedFireSpread);
-            
+
+           block.GetComponent<Renderer>().material = lavaMat;
+
         }
         
         
         //reduce lifespan
-    
+        renderer = GetComponent<MeshRenderer>();
+
         lifeSpan -= 1;
-        renderer.material.color = Color.red;
+        renderer.material.SetFloat(lavaIntensity, 0.5f * lifeSpan );
 
         if (lifeSpan <= 1)
         {

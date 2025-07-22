@@ -24,6 +24,11 @@ public class GameManager : MonoBehaviour
 
    private TowerGenerator generator;
 
+
+   public List<Upgrade> currentActiveUpgrades = new();
+
+   public List<Upgrade> availableUpgrades;
+
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -117,11 +122,36 @@ public class GameManager : MonoBehaviour
         turn = 0;
         round += 1;
 
+        
+        //Load upgrade UI
+        
+        
+        
+
         //Reset tower
         generator.ResetTower();
         
         generator.GenerateTower(10 * round);
         
+        
+   
+        
+        
+    }
+
+    public List<Upgrade> SelectUpgrades()
+    {
+        List<Upgrade> selectedUpgrades = new();
+
+        for (int i = 0; i < 2; i++)
+        {
+            var rand = Random.Range(0, availableUpgrades.Count);
+            selectedUpgrades.Add(availableUpgrades[rand]);
+
+         
+        }
+        
+        return selectedUpgrades;
     }
 }
 

@@ -77,13 +77,15 @@ public class Block : MonoBehaviour
 
       if (selected)
       {
+          //Sets object to be outlined
+          gameObject.layer = 3;
           rigid.useGravity = false;
-          renderer.material.color -= new Color(0, 0, 0, 0.7f);
       }
       else
       {
+          //Sets object to be not outlined
+          gameObject.layer = 0;
           rigid.useGravity = true;
-          renderer.material.color += new Color(0, 0, 0, 0.7f);
       }
   }
 }

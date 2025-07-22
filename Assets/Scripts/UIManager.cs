@@ -60,4 +60,9 @@ public class UIManager : MonoBehaviour
         }
 
     }
+
+    void DisplayUpgradeUI()
+    {
+        
+    }
 }

@@ -1,0 +1,27 @@
+VisualElement {
+}
+
+.title {
+    -unity-text-align: upper-center;
+    font-size: 100px;
+    bottom: -91px;
+    -unity-font-style: bold-and-italic;
+}
+
+.cardTitle {
+    padding-bottom: 105px;
+}
+
+.cardDescription {
+    margin-top: 20px;
+    margin-bottom: 0;
+    padding-bottom: 34px;
+    padding-top: 89px;
+}
+
+.upgradeButton {
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+}
