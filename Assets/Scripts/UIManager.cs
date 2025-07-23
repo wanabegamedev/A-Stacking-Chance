@@ -1,51 +1,43 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
-using Button = UnityEngine.UI.Button;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
-   [SerializeField] private UIDocument gameUI;
-   [SerializeField] private UIDocument upgradeUI;
-   
+
    private GameManager manager;
 
    private PointBoundary boundary; 
-
-   private VisualElement rootElement;
-
-   private VisualElement upgradeRootElement;
-
    
    
-   private Label score;
-   private Label progressBar;
-   private Label multiplier;
    
-   private VisualElement timer;
-   private Label timerText;
-    
-    
+   
+   [SerializeField]  private TextMeshProUGUI score;
+   [SerializeField]  private TextMeshProUGUI progressBar;
+   [SerializeField] private TextMeshProUGUI multiplier;
+   
+   [SerializeField] private TextMeshProUGUI timer;
 
+
+   [Header("Upgrade System")] 
+   [SerializeField] private UpgradeHolder selection1;
+   [SerializeField] private UpgradeHolder selection2;
+   [SerializeField] private UpgradeHolder selection3;
+
+   [Header("Canvas")]
+   [SerializeField] private GameObject upgradeCanvas;
+   [SerializeField] private GameObject gameUICanvas;
+
+   
     void Start()
     {
-        rootElement = gameUI.rootVisualElement;
 
         manager = FindAnyObjectByType<GameManager>();
         boundary = FindAnyObjectByType<PointBoundary>();
-        
-        score = rootElement.Q("score-text") as Label;
-        progressBar = rootElement.Q("progress-bar") as Label;
-        multiplier = rootElement.Q("multiplier-text") as Label;
-        timer = rootElement.Q("timer-ui");
 
-        timerText = timer.Q("timer-text") as Label;
-        
-        upgradeRootElement = upgradeUI.rootVisualElement.Q("card-holder");
-        upgradeUI.rootVisualElement.visible = false;
+
+        upgradeCanvas.SetActive(false);
 
     }
 
@@ -57,17 +49,17 @@ public class UIManager : MonoBehaviour
 
         if (boundary.gracePeriodActive)
         {
-            timer.visible = true;
-            multiplier.visible = true;
+            timer.gameObject.SetActive(true);
+            multiplier.gameObject.SetActive(true);
 
-            timerText.text = boundary.timePassed.ToString();
+            timer.text = boundary.timePassed.ToString();
             
             multiplier.text = manager.scoreMultiplier +"X";
         }
         else
         {
-            timer.visible = false;
-            multiplier.visible = false;
+            timer.gameObject.SetActive(false);
+            multiplier.gameObject.SetActive(false);
             
             
         }
@@ -76,10 +68,11 @@ public class UIManager : MonoBehaviour
 
     public void DisplayUpgradeUI()
     {
+        manager.inUpgradePhase = true;
+        gameUICanvas.SetActive(false);
+        upgradeCanvas.SetActive(true);
         //uses the root element to make sure no upgrade UI is displayed
-        upgradeUI.rootVisualElement.visible = true;
-       
-        var selectionCards = upgradeRootElement.Query<VisualElement>("selection").ToList();
+        
         
         List<Upgrade> selectedUpgrades = manager.SelectUpgrades();
 
@@ -87,21 +80,31 @@ public class UIManager : MonoBehaviour
 
         foreach (var upgrade in selectedUpgrades)
         {
-            //Get selection and assosiated child elements
-            var root = selectionCards[increment];
 
-            var title = root.Q("title") as Label;
-            var description =  root.Q("description") as Label;
-            var image = root.Q("image");
+            switch (increment)
+            {
+                case 0:
+                    selection1.SetupHolder(upgrade);
+                    break;
+                case 1:
+                    selection2.SetupHolder(upgrade);
+                    break;
+                default:
+                    selection3.SetupHolder(upgrade);
+                    break;
+            }
 
-
-            title.text = upgrade.upgradeName;
-            description.text = upgrade.upgradeDesc;
-            
+            increment++;
 
         }
         
         
         
+    }
+
+    public void HideUpgradeUI()
+    {
+        upgradeCanvas.SetActive(false);
+        gameUICanvas.SetActive(true);
     }
 }

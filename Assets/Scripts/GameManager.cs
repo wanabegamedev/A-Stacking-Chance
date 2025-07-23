@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
    public List<Upgrade> availableUpgrades;
 
    private UIManager uiManager;
+
+   public bool inUpgradePhase;
 
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -125,21 +128,43 @@ public class GameManager : MonoBehaviour
         turn = 0;
         round += 1;
 
+
+        StartCoroutine(UpgradeLoop());
         
         //Load upgrade UI
         
-        uiManager.DisplayUpgradeUI();
-        
+      
 
         //Reset tower
-        generator.ResetTower();
-        
-        generator.GenerateTower(10 * round);
+       
         
         
    
         
         
+    }
+    
+    IEnumerator UpgradeLoop()
+    {
+        uiManager.DisplayUpgradeUI();
+
+        while (inUpgradePhase)
+        {
+            yield return null;
+        }
+        
+        //after upgrade phase generate new tower
+        
+        
+        generator.ResetTower();
+        
+        generator.GenerateTower(10 * round);
+        
+        uiManager.HideUpgradeUI();
+        
+        yield return null;
+
+       
     }
 
     public List<Upgrade> SelectUpgrades()
@@ -157,5 +182,22 @@ public class GameManager : MonoBehaviour
         
         return selectedUpgrades;
     }
+
+
+    public void SetupUpgrade(Upgrade selectedUpgrade)
+    {
+        if (!selectedUpgrade.upgradePermanent)
+        {
+            selectedUpgrade.TriggerUpgrade();
+            return;
+            
+        }
+        
+        //TODOD: Add upgrade to list
+        selectedUpgrade.TriggerUpgrade();
+    }
+
+
+ 
 }
 
