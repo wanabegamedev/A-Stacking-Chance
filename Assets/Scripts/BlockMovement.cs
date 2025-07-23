@@ -20,17 +20,36 @@ public class BlockMovement : MonoBehaviour
 
     void MovePieces()
     {
-        var xAxis = Input.GetAxis("Horizontal");
-        var zAxis = Input.GetAxis("Vertical");
+        var horizontal = Input.GetAxis("Horizontal");
+        var vertical = Input.GetAxis("Vertical");
 
-        if (xAxis != 0 || zAxis != 0)
+        
+        //provides normalised vectors in local space, but converted to world space
+        Vector3 camForward = Camera.main.transform.forward;
+        Vector3 camRight = Camera.main.transform.right;
+
+        //Remove Y axis to stop the camera interfering with vertical movement
+        camForward.y = 0;
+        camRight.y = 0;
+
+        //stops any slowdown when the camera is tilted
+       camForward = camForward.normalized;
+       camRight = camRight.normalized;
+
+
+        Vector3 relativeForwardInput = vertical * camForward;
+        Vector3 relativeHorizontalInput = horizontal * camRight;
+
+        Vector3 cameraRelativeInput = relativeForwardInput + relativeHorizontalInput;
+
+        if (cameraRelativeInput != new Vector3(0, 0, 0))
         {
-            Vector3 direction = new Vector3(xAxis * Time.deltaTime * movementSpeed, 0, zAxis * Time.deltaTime * movementSpeed);
+           
 
             foreach (var block in manager.selectedBlocks)
             {
                 block.ActivateMoveModifiers();
-                block.transform.position += direction;
+                block.transform.Translate(cameraRelativeInput * movementSpeed, Space.World);
             }
         }
 

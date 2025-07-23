@@ -787,6 +787,7 @@ MonoBehaviour:
   - {fileID: 5753899359301297925, guid: 47dc555ca6391cc48ac66e9d2fb75e95, type: 3}
   - {fileID: 5753899359301297925, guid: e31ef1241a89d994090ed0e726a46abd, type: 3}
   - {fileID: 5753899359301297925, guid: fb9bdcb8442c5b3458cb2133577aa061, type: 3}
+  - {fileID: 5753899359301297925, guid: 8fdd61a9e0a4cd147b366c5a0fd3da79, type: 3}
   rotatedLayer: 0
   blockWidth: 5
   blockHeight: 1
@@ -1849,7 +1850,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a2703da9d9ffa84e99b6fa305cd876e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 20
+  movementSpeed: 2
 --- !u!114 &1019604794
 MonoBehaviour:
   m_ObjectHideFlags: 0
