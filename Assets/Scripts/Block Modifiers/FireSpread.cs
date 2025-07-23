@@ -15,12 +15,13 @@ public class FireSpread : BlockModifier
 
     private void OnEnable()
     {
-        //we always need to make sure to assign the lava material when setting up the modifier
-        lavaMat = renderer.material;
+        
         
         
         renderer = GetComponent<MeshRenderer>();
         
+        //we always need to make sure to assign the lava material when setting up the modifier
+        lavaMat = renderer.material;
        
         renderer.material.SetFloat(lavaIntensity, 2);
 

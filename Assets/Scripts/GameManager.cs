@@ -34,6 +34,16 @@ public class GameManager : MonoBehaviour
 
    public bool inUpgradePhase;
 
+
+   [Header("Audio Clips")] 
+  
+   [SerializeField] private AudioClip loseClip;
+
+   [SerializeField] private AudioClip roundWinClip;
+   
+   [SerializeField] private AudioClip piecePullOutSound;
+   
+
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -116,31 +126,24 @@ public class GameManager : MonoBehaviour
 
     public void EndGame()
     {
+        AudioManager.instance.PlaySound(loseClip);
         print("Game Over");
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        uiManager.ShowEndUI();
+        Time.timeScale = 0;
+        
     }
 
     public void EndRound()
     {
         score = 0;
         scoreUntilNextRound = scoreUntilNextRound * 2;
+        
+        AudioManager.instance.PlaySound(roundWinClip);
 
         turn = 0;
         round += 1;
 
-
         StartCoroutine(UpgradeLoop());
-        
-        //Load upgrade UI
-        
-      
-
-        //Reset tower
-       
-        
-        
-   
-        
         
     }
     

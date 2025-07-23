@@ -49,7 +49,7 @@ public class BlockMovement : MonoBehaviour
             foreach (var block in manager.selectedBlocks)
             {
                 block.ActivateMoveModifiers();
-                block.transform.Translate(cameraRelativeInput * movementSpeed, Space.World);
+                block.transform.Translate(cameraRelativeInput * (movementSpeed * Time.deltaTime), Space.World);
             }
         }
 

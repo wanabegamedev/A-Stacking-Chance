@@ -25,10 +25,18 @@ public class UIManager : MonoBehaviour
    [SerializeField] private UpgradeHolder selection2;
    [SerializeField] private UpgradeHolder selection3;
 
+
+   [Header("Game Over UI")] [SerializeField]
+   private TextMeshProUGUI highscoreText;
+   
+
    [Header("Canvas")]
    [SerializeField] private GameObject upgradeCanvas;
    [SerializeField] private GameObject gameUICanvas;
+   [SerializeField] private GameObject endUICanvas;
 
+   
+   
    
     void Start()
     {
@@ -106,5 +114,15 @@ public class UIManager : MonoBehaviour
     {
         upgradeCanvas.SetActive(false);
         gameUICanvas.SetActive(true);
+    }
+
+    public void ShowEndUI()
+    {
+        endUICanvas.SetActive(true);
+        
+        upgradeCanvas.SetActive(false);
+        gameUICanvas.SetActive(false);
+
+        highscoreText.text = manager.score.ToString();
     }
 }
