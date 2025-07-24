@@ -123,6 +123,6 @@ public class UIManager : MonoBehaviour
         upgradeCanvas.SetActive(false);
         gameUICanvas.SetActive(false);
 
-        highscoreText.text = manager.score.ToString();
+        highscoreText.text = "High Score: " + manager.score;
     }
 }
