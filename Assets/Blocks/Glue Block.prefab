@@ -109,6 +109,7 @@ MonoBehaviour:
   onTurnStartModifierList: []
   onTurnEndModifierList: []
   onRemoveModifierList: []
+  blockLocked: 0
   selected: 0
 --- !u!65 &7894393542153662163
 BoxCollider:
@@ -171,4 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modifierName: Sticky
+  modifierDescription: Makes other blocks aroud it stick to itself
   stickyRange: 1

@@ -31,8 +31,8 @@ Material:
     - _horizonBlend: 0.44
     - _skyBlend: 0.81
     m_Colors:
-    - _groundColor: {r: 0, g: 0.9716981, b: 0.90929544, a: 1}
-    - _horizonColor: {r: 0.003248495, g: 0.6886792, b: 0.6402959, a: 1}
+    - _groundColor: {r: 0.041272707, g: 0.46226418, b: 0.023985408, a: 1}
+    - _horizonColor: {r: 0.029503396, g: 0.4811321, b: 0.08627958, a: 1}
     - _skyColor: {r: 0.33877742, g: 1, b: 0, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

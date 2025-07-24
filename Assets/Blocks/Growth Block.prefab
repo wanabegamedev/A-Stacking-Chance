@@ -172,4 +172,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modifierName: Growth
+  modifierDescription: Expands over time
   growthScale: 0.1

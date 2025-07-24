@@ -123,7 +123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06ba5abf23f83754b98c4afabde25831, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifierName: Default Modifier
+  modifierName: Ice
+  modifierDescription: Extra slippy
   iceSpeed: 20
 --- !u!65 &7894393542153662163
 BoxCollider:

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class Block : MonoBehaviour
@@ -20,7 +21,9 @@ public class Block : MonoBehaviour
   private GameManager manager;
   private Rigidbody rigid;
   private MeshRenderer renderer;
+  private TooltipManager tooltip;
 
+  
   public bool selected;
 
   private void Awake()
@@ -28,6 +31,7 @@ public class Block : MonoBehaviour
       rigid = GetComponent<Rigidbody>();
       manager = FindAnyObjectByType<GameManager>();
       renderer = GetComponent<MeshRenderer>();
+      tooltip = FindAnyObjectByType<TooltipManager>();
   }
 
 
@@ -87,5 +91,15 @@ public class Block : MonoBehaviour
           gameObject.layer = 0;
           rigid.useGravity = true;
       }
+  }
+
+  private void OnMouseEnter()
+  {
+      tooltip.SetupTooltip(this);
+  }
+
+  public void OnMouseExit()
+  {
+      tooltip.HideTooltip();
   }
 }

@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fe87911f7a8a1545825e48c8494faf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifierName: Fire Block
+  modifierName: Fire
+  modifierDescription: Burns away after 5 turns!
   spreadRadius: 10
   lifeSpan: 5
