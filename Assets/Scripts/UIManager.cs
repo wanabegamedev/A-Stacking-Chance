@@ -97,7 +97,7 @@ public class UIManager : MonoBehaviour
                 case 1:
                     selection2.SetupHolder(upgrade);
                     break;
-                default:
+                case 2:
                     selection3.SetupHolder(upgrade);
                     break;
             }

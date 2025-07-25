@@ -21,7 +21,7 @@ public class TooltipManager : MonoBehaviour
 
     public void SetupTooltip(Block block)
     {
-        print("hi");
+     
         tooltip.SetActive(true);
         blockName.text = block.blockName;
         blockDescription.text = GenerateDescription(block);
@@ -68,8 +68,13 @@ public class TooltipManager : MonoBehaviour
         
         stringToReturn += EOL;
         
-     
-        print(stringToReturn);
+        stringToReturn += "Other Modifiers:";
+        
+        stringToReturn += ReturnModifiers(block.otherModifierList);
+        
+        stringToReturn += EOL;
+        
+        
         
         return stringToReturn;
         

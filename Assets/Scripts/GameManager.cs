@@ -41,8 +41,10 @@ public class GameManager : MonoBehaviour
 
    [SerializeField] private AudioClip roundWinClip;
    
-   [SerializeField] private AudioClip piecePullOutSound;
+   [SerializeField] private AudioClip piecePullOutClp;
    
+   [SerializeField] private AudioClip roundStartClip;
+
 
  
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -88,6 +90,14 @@ public class GameManager : MonoBehaviour
             
     }
 
+    void DeselectAllBlocks()
+    {
+        foreach (var block in selectedBlocks)
+        {
+            block.selected = false;
+        }
+    }
+
     public void AddToMultiplier(int amount)
     {
 
@@ -102,14 +112,26 @@ public class GameManager : MonoBehaviour
         scoreMultiplier = 1;
 
         //reset the selected blocks
+        DeselectAllBlocks();
         selectedBlocks = new List<Block>();
         
-        StartTurn();
+        
+        for (int i = 0; i < generator.transform.childCount; i++)
+        {
+            generator.transform.GetChild(i).GetComponent<Block>().ActivateOnTurnEndModifiers();
+        }
+        
+        //Add a delay before a new turn starts
+        
+        Invoke(nameof(StartTurn), 0.7f);
+  
         
     }
 
     void StartTurn()
     {
+        AudioManager.instance.PlaySound(roundStartClip);
+        
         for (int i = 0; i < generator.transform.childCount; i++)
         {
            generator.transform.GetChild(i).GetComponent<Block>().ActivateTurnStartModifiers();
@@ -125,8 +147,7 @@ public class GameManager : MonoBehaviour
 
 
     public void EndGame()
-    {
-        AudioManager.instance.PlaySound(loseClip);
+    { AudioManager.instance.PlaySound(loseClip);
         print("Game Over");
         uiManager.ShowEndUI();
         Time.timeScale = 0;
@@ -139,6 +160,9 @@ public class GameManager : MonoBehaviour
         scoreUntilNextRound = scoreUntilNextRound * 2;
         
         AudioManager.instance.PlaySound(roundWinClip);
+       
+        DeselectAllBlocks();
+        selectedBlocks = new();
 
         turn = 0;
         round += 1;
@@ -149,6 +173,7 @@ public class GameManager : MonoBehaviour
     
     IEnumerator UpgradeLoop()
     {
+        Time.timeScale = 0;
         uiManager.DisplayUpgradeUI();
 
         while (inUpgradePhase)
@@ -164,6 +189,7 @@ public class GameManager : MonoBehaviour
         generator.GenerateTower(10 * round);
         
         uiManager.HideUpgradeUI();
+        Time.timeScale = 1;
         
         yield return null;
 

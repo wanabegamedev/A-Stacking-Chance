@@ -14,6 +14,9 @@ public class Block : MonoBehaviour
   public List<BlockModifier> onTurnStartModifierList;
   public List<BlockModifier> onTurnEndModifierList;
   public List<BlockModifier> onRemoveModifierList;
+  
+  //Holds modifiers that run in their own time
+  public List<BlockModifier> otherModifierList;
 
   public bool blockLocked = false;
 
@@ -45,7 +48,7 @@ public class Block : MonoBehaviour
   
   public void ActivateOnTurnEndModifiers()
   {
-      foreach (var modifier in onMoveModifierList)
+      foreach (var modifier in onTurnEndModifierList)
       {
           modifier.ActivateModifier();
       }
