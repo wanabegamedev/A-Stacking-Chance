@@ -102,13 +102,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f95f05882489de498638bc5d6f2019a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockName: Base Block
+  blockName: Glue Block
   blockScoreValue: 5
+  blockWeight: 12
   onMoveModifierList:
   - {fileID: 5234668582457965750}
   onTurnStartModifierList: []
   onTurnEndModifierList: []
   onRemoveModifierList: []
+  otherModifierList: []
   blockLocked: 0
   selected: 0
 --- !u!65 &7894393542153662163
@@ -140,8 +142,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4410995027713637066}
   serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
+  m_Mass: 20
+  m_LinearDamping: 2.05
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

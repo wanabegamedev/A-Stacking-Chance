@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             
     }
 
-    void DeselectAllBlocks()
+  public void DeselectAllBlocks()
     {
         foreach (var block in selectedBlocks)
         {
@@ -200,7 +200,7 @@ public class GameManager : MonoBehaviour
     {
         List<Upgrade> selectedUpgrades = new();
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
         {
             var rand = Random.Range(0, availableUpgrades.Count);
             selectedUpgrades.Add(availableUpgrades[rand]);

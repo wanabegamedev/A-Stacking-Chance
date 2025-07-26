@@ -48,6 +48,13 @@ public class BlockMovement : MonoBehaviour
 
             foreach (var block in manager.selectedBlocks)
             {
+                if (block == null)
+                {
+                    print("Error: Block Does Not Exist");
+                    manager.DeselectAllBlocks();
+                    return;
+                }
+                
                 block.ActivateMoveModifiers();
                 block.transform.Translate(cameraRelativeInput * (movementSpeed * Time.deltaTime), Space.World);
             }

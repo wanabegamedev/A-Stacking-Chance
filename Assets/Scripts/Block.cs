@@ -9,6 +9,9 @@ public class Block : MonoBehaviour
     public string blockName;
 
     public int blockScoreValue;
+
+    [Range(1, 100)]
+    public int blockWeight = 10;
   
   public List<BlockModifier> onMoveModifierList;
   public List<BlockModifier> onTurnStartModifierList;
@@ -64,9 +67,9 @@ public class Block : MonoBehaviour
       }
   }
   
-  public void OnRemoveModifiers()
+  public void ActivateOnRemoveModifiers()
   {
-      foreach (var modifier in onMoveModifierList)
+      foreach (var modifier in onRemoveModifierList)
       {
           modifier.ActivateModifier();
       }

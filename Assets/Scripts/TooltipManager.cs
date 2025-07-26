@@ -42,7 +42,7 @@ public class TooltipManager : MonoBehaviour
 
         stringToReturn += EOL;
 
-        stringToReturn += ReturnModifiers(block.onTurnEndModifierList);
+        stringToReturn += ReturnModifiers(block.onTurnStartModifierList);
         
         stringToReturn += EOL;
 

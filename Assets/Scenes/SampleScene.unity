@@ -742,6 +742,7 @@ MonoBehaviour:
   timePassed: 0
   gracePeriodActive: 0
   gracePeriodScoreHolder: 0
+  onPieceRemoveClip: {fileID: 8300000, guid: 44789c4ee182db8469d7f1e030b5455e, type: 3}
 --- !u!1 &136981210
 GameObject:
   m_ObjectHideFlags: 0
@@ -1846,6 +1847,8 @@ MonoBehaviour:
   - {fileID: 5753899359301297925, guid: fb9bdcb8442c5b3458cb2133577aa061, type: 3}
   - {fileID: 5753899359301297925, guid: 8fdd61a9e0a4cd147b366c5a0fd3da79, type: 3}
   - {fileID: 5753899359301297925, guid: cff8786e122135a4dbb75e011fd0c8a6, type: 3}
+  - {fileID: 5753899359301297925, guid: 1d3694984d00afd468e7766d9d1e74c2, type: 3}
+  - {fileID: 5753899359301297925, guid: ada93277671457e4bbd1c7f4e6182348, type: 3}
   rotatedLayer: 0
   blockWidth: 5
   blockHeight: 1
@@ -3291,7 +3294,7 @@ Transform:
   m_GameObject: {fileID: 777916195}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: -1, z: -1}
+  m_LocalPosition: {x: 1.9999999, y: -1, z: 1}
   m_LocalScale: {x: 9, y: 1, z: 9}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3358,7 +3361,7 @@ GameObject:
   - component: {fileID: 944074546}
   - component: {fileID: 944074545}
   m_Layer: 0
-  m_Name: TestUpgrade
+  m_Name: Upgrade Holder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3391,7 +3394,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1233142596}
+  - {fileID: 2066662532}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &984869788
@@ -4338,6 +4343,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161197949}
   m_CullTransparentMesh: 1
+--- !u!1 &1233142595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1233142596}
+  - component: {fileID: 1233142597}
+  m_Layer: 0
+  m_Name: ExplosiveChanceChange
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1233142596
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233142595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 944074546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1233142597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1233142595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84a11418b2459b4c8d6708be22b221c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePermanent: 0
+  upgradeName: Increase Explosive Block Chance
+  upgradeDesc: Increases the chance of explosive blocks by 10%
+  amount: 10
+  block: {fileID: 5753899359301297925, guid: cff8786e122135a4dbb75e011fd0c8a6, type: 3}
 --- !u!1 &1245433968
 GameObject:
   m_ObjectHideFlags: 0
@@ -6444,6 +6498,55 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2064867662}
   m_CullTransparentMesh: 1
+--- !u!1 &2066662531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2066662532}
+  - component: {fileID: 2066662533}
+  m_Layer: 0
+  m_Name: ExplosiveChanceChangeDecrease
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2066662532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066662531}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 944074546}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2066662533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066662531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b84a11418b2459b4c8d6708be22b221c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradePermanent: 0
+  upgradeName: Decrease Explosive Block Chance
+  upgradeDesc: Decrease the chance of explosive blocks by 10%
+  amount: -10
+  block: {fileID: 5753899359301297925, guid: cff8786e122135a4dbb75e011fd0c8a6, type: 3}
 --- !u!1 &2137554981
 GameObject:
   m_ObjectHideFlags: 0

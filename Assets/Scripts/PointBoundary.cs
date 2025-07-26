@@ -15,6 +15,8 @@ public class PointBoundary : MonoBehaviour
     private int blocksOut = 0;
 
     public int gracePeriodScoreHolder = 0;
+
+    [SerializeField] private AudioClip onPieceRemoveClip;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,10 +36,15 @@ public class PointBoundary : MonoBehaviour
         
         if (!gracePeriodActive && other.TryGetComponent<Block>(out Block firstBlock))
         {
+            
+            AudioManager.instance.PlaySound(onPieceRemoveClip);
+            
+            
             blocksOut += 1;
             StartCoroutine(StartPieceRemovalGracePeriod());
             
             //TRIGGER ON REMOVE BLOCK EVENTS (With any local modifiers adjusting the individual block's score)
+            firstBlock.ActivateOnRemoveModifiers();
             
             gracePeriodScoreHolder += firstBlock.blockScoreValue;
 
@@ -48,9 +55,12 @@ public class PointBoundary : MonoBehaviour
         }
         else if (other.TryGetComponent<Block>(out Block otherBlock))
         {
+            AudioManager.instance.PlaySound(onPieceRemoveClip);
+            
             blocksOut += 1;
            
             //TRIGGER ON REMOVE BLOCK EVENTS (With any local modifiers adjusting the individual block's score)
+            otherBlock.ActivateOnRemoveModifiers();
 
             gracePeriodScoreHolder += otherBlock.blockScoreValue;
             
@@ -84,9 +94,6 @@ public class PointBoundary : MonoBehaviour
             
             
             timePassed += Time.deltaTime;
-            print(timePassed);
-            
-            
 
             yield return null;
             

@@ -14,10 +14,9 @@ GameObject:
   - component: {fileID: 5753899359301297925}
   - component: {fileID: 7894393542153662163}
   - component: {fileID: 7666398497186823150}
-  - component: {fileID: 2900290055764284924}
-  - component: {fileID: -1334401602596380840}
+  - component: {fileID: 578967222780601383}
   m_Layer: 0
-  m_Name: Explosive Block
+  m_Name: CompanionBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d84a75e0f540bae45aeaad4d6e8aabfe, type: 2}
+  - {fileID: 2100000, guid: fb50b610b4e6b4e40ada56823e0e35b5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,14 +102,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f95f05882489de498638bc5d6f2019a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockName: Explosive Block
-  blockScoreValue: 10
-  blockWeight: 6
+  blockName: Companion Block
+  blockScoreValue: 1
+  blockWeight: 13
   onMoveModifierList: []
   onTurnStartModifierList: []
-  onTurnEndModifierList:
-  - {fileID: 2900290055764284924}
-  onRemoveModifierList: []
+  onTurnEndModifierList: []
+  onRemoveModifierList:
+  - {fileID: 578967222780601383}
   otherModifierList: []
   blockLocked: 0
   selected: 0
@@ -162,7 +161,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2900290055764284924
+--- !u!114 &578967222780601383
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,26 +170,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4410995027713637066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 613067f3c800c1e489641683cff30aa5, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d59feef3cecae44aa30f7ee499959b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modifierName: Explosive
-  modifierDescription: Will explode after this turn!
-  explosionRadius: 10
-  explosionPower: 30
-  explosionClip: {fileID: 8300000, guid: 529a22c6c14f37f43a935d9d3415942c, type: 3}
---- !u!114 &-1334401602596380840
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4410995027713637066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f98b718ac1fd6648910e29066594722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modifierName: Grow
-  modifierDescription: Grows
-  growthScale: 0.1
+  modifierName: Companion
+  modifierDescription: If it is removed with an even number of blocks it will double
+    the score. Else, it will divide the score!
+  multiplyClip: {fileID: 8300000, guid: 11cdd2019437e524b9cf4f9ac9d91c53, type: 3}
+  divideClip: {fileID: 8300000, guid: 55f003274a7cba940bd2f70da354b203, type: 3}

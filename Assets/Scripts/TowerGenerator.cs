@@ -19,14 +19,25 @@ public class TowerGenerator : MonoBehaviour
     [SerializeField] private int blockWidth = 2;
     [SerializeField] private int blockHeight = 1;
     
+
+    public Dictionary<string, int> blockWeightsDictionary = new Dictionary<string, int>();
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        LoadWeights();
         GenerateTower(towerHeight);
     }
 
 
+
+    public void LoadWeights()
+    {
+        foreach (var block in blockTypes)
+        {
+            blockWeightsDictionary.Add(block.blockName, block.blockWeight);
+        }
+    }
     public void GenerateTower(int height)
     {
     
@@ -36,8 +47,13 @@ public class TowerGenerator : MonoBehaviour
             //width
             for (int w = 0; w < 3; w++)
             {
-                var blockToInstantiate = SelectBlock();
-                var block = Instantiate(blockToInstantiate);
+                Transform block = null;
+                while (block == null) 
+                {
+                    var blockToInstantiate = SelectBlock();
+                    block = Instantiate(blockToInstantiate);
+                }
+            
                 
                 //if it is a rotated layer, rotate the block
                 if (rotatedLayer)
@@ -85,11 +101,33 @@ public class TowerGenerator : MonoBehaviour
 
     Transform SelectBlock()
     {
-        var randNumber = Random.Range(0, blockTypes.Count);
 
-        var selectedBlock = blockTypes[randNumber];
+        int total = 0;
 
-        return selectedBlock.transform;
+        foreach (var block in blockWeightsDictionary)
+        {
+            total += block.Value;
+        }
+        
+        var randWeight = Random.Range(1, total);
+
+        print("random weight: " + randWeight);
+
+        foreach (var block in blockTypes)
+        {
+            if (randWeight <= block.blockWeight) 
+            {
+                return block.transform;
+            }
+            else
+            {
+                randWeight -= block.blockWeight;
+            }
+            
+                
+        }
+
+        return null;
     }
 
 
@@ -100,5 +138,14 @@ public class TowerGenerator : MonoBehaviour
         {
             Destroy(transform.GetChild(i).gameObject);
         }
+    }
+
+
+    public void ChangeBlockWeight(string blockName, int amount)
+    {
+        blockWeightsDictionary[blockName] += amount;
+
+        blockWeightsDictionary[blockName] = Mathf.Clamp(blockWeightsDictionary[blockName], 0, 100);
+
     }
 }
