@@ -47,12 +47,14 @@ public class TowerGenerator : MonoBehaviour
             //width
             for (int w = 0; w < 3; w++)
             {
-                Transform block = null;
-                while (block == null) 
+                Transform blockToInstantiate = null;
+                while (blockToInstantiate == null) 
                 {
-                    var blockToInstantiate = SelectBlock();
-                    block = Instantiate(blockToInstantiate);
+                     blockToInstantiate = SelectBlock();
+                   
                 }
+                
+                var block = Instantiate(blockToInstantiate);
             
                 
                 //if it is a rotated layer, rotate the block

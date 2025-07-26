@@ -6,7 +6,7 @@ public class PointBoundary : MonoBehaviour
 {
     private GameManager manager;
 
-    [SerializeField] private float gracePeriodTime = 5;
+   public float gracePeriodTime = 5;
     
     public float timePassed = 0f;
 
@@ -28,7 +28,7 @@ public class PointBoundary : MonoBehaviour
     void Update()
     {
         
-    }
+    }   
 
 
     private void OnTriggerExit(Collider other)

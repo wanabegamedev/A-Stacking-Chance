@@ -60,7 +60,7 @@ public class UIManager : MonoBehaviour
             timer.gameObject.SetActive(true);
             multiplier.gameObject.SetActive(true);
 
-            timer.text = boundary.timePassed.ToString();
+            timer.text = "Combo Time: " + boundary.timePassed;
             
             multiplier.text = manager.scoreMultiplier +"X";
         }
