@@ -3576,6 +3576,8 @@ MonoBehaviour:
   currentActiveUpgrades: []
   availableUpgrades:
   - {fileID: 944074545}
+  - {fileID: 1233142597}
+  - {fileID: 2066662533}
   inUpgradePhase: 0
   loseClip: {fileID: 8300000, guid: b7ab47f714f50404c9ce9df09f09541e, type: 3}
   roundWinClip: {fileID: 8300000, guid: 436730cc934502445b6554c6d2997547, type: 3}
