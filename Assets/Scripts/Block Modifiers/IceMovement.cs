@@ -23,7 +23,7 @@ public class IceMovement : BlockModifier
 
         Vector3 direction = new Vector3(xAxis * iceSpeed * Time.deltaTime, 0, zAxis * iceSpeed * Time.deltaTime);
 
-        transform.position += direction;
+        transform.Translate(direction, Space.World);
 
 
     }

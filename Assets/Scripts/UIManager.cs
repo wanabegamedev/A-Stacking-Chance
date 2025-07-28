@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -72,10 +75,23 @@ public class UIManager : MonoBehaviour
             
         }
 
+        //makes sure UI support is enabled when a controller is plugged in
+        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame &&
+            EventSystem.current.currentSelectedGameObject == null)
+        {
+            EventSystem.current.SetSelectedGameObject(selection1.gameObject);
+        }
+
     }
 
     public void DisplayUpgradeUI()
     {
+        //always set selected game object for controller support
+        EventSystem.current.SetSelectedGameObject(selection1.gameObject);
+       
+        //Makes sure the first button is always selected
+        selection1.GetComponentInChildren<Button>().Select();
+        
         manager.inUpgradePhase = true;
         gameUICanvas.SetActive(false);
         upgradeCanvas.SetActive(true);
@@ -122,6 +138,8 @@ public class UIManager : MonoBehaviour
         
         upgradeCanvas.SetActive(false);
         gameUICanvas.SetActive(false);
+        
+        EventSystem.current.SetSelectedGameObject(endUICanvas.GetComponentInChildren<Button>().gameObject);
 
         highscoreText.text = "High Score: " + manager.score;
     }

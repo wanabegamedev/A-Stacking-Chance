@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
             instance = this;
         }
         
-        instance = this;
+  
     }
 
     public  void PlaySound(AudioClip snd)

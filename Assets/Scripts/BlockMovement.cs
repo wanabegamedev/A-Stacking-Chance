@@ -5,11 +5,13 @@ public class BlockMovement : MonoBehaviour
     private GameManager manager;
 
     [SerializeField] private float movementSpeed = 20;
+    private PlayerInputHandler inputHandler;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         manager = FindAnyObjectByType<GameManager>();
+        inputHandler = PlayerInputHandler.instance;
     }
 
     // Update is called once per frame
@@ -20,8 +22,8 @@ public class BlockMovement : MonoBehaviour
 
     void MovePieces()
     {
-        var horizontal = Input.GetAxis("Horizontal");
-        var vertical = Input.GetAxis("Vertical");
+       var horizontal = inputHandler.moveInputValue.x;
+        var vertical = inputHandler.moveInputValue.y;
 
         
         //provides normalised vectors in local space, but converted to world space

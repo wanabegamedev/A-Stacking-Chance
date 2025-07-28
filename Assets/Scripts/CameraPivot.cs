@@ -16,9 +16,12 @@ public class CameraPivot : MonoBehaviour
     private float yaw = 0;
     private float pitch = 0;
 
+    private PlayerInputHandler inputHandler;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        inputHandler = PlayerInputHandler.instance;
         yaw = transform.eulerAngles.y;
         pitch = transform.eulerAngles.x;
         OrbitPoint();
@@ -50,8 +53,8 @@ public class CameraPivot : MonoBehaviour
 
     void RotatePoint()
     {
-        var mouseX = Input.GetAxis("Mouse X");
-        var mouseY = Input.GetAxis("Mouse Y");
+        var mouseX = inputHandler.lookInputValue.x;
+        var mouseY = inputHandler.lookInputValue.y;
 
 
         yaw += mouseX * orbitSensitivity;
