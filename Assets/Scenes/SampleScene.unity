@@ -4902,7 +4902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1146521200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7453,6 +7453,8 @@ MonoBehaviour:
   move: Move
   look: Look
   select: Select
+  cameraPivot: CameraPivot
+  cameraZoom: cameraZoom
 --- !u!4 &1999096979
 Transform:
   m_ObjectHideFlags: 0
