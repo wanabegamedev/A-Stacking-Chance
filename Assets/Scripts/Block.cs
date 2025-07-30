@@ -24,6 +24,9 @@ public class Block : MonoBehaviour
   public bool blockLocked = false;
 
 
+  private bool blockTooltipActive = false;
+
+
   private GameManager manager;
   private Rigidbody rigid;
   private MeshRenderer renderer;
@@ -38,6 +41,16 @@ public class Block : MonoBehaviour
       manager = FindAnyObjectByType<GameManager>();
       renderer = GetComponent<MeshRenderer>();
       tooltip = FindAnyObjectByType<TooltipManager>();
+      
+      FindAnyObjectByType<MouseInputManager>().onCursorHover += MouseInputManager_OnCursorHover;
+  }
+
+  private void MouseInputManager_OnCursorHover(object sender, BlockHoverEventArgs e)
+  {
+      if (e.hoveredBlock == this)
+      {
+          tooltip.SetupTooltip(this);
+      }
   }
 
 
@@ -75,7 +88,7 @@ public class Block : MonoBehaviour
       }
   }
 
-  private void OnMouseUp()
+  public void OnBlockClick()
   {
       if (blockLocked)
       {
@@ -99,13 +112,18 @@ public class Block : MonoBehaviour
       }
   }
 
-  private void OnMouseEnter()
+  public void MouseOverBlock()
   {
-      tooltip.SetupTooltip(this);
+      blockTooltipActive = true;
+      
+      print("UI popup");
   }
 
-  public void OnMouseExit()
+  public void MouseLeftBlock()
   {
       tooltip.HideTooltip();
+      blockTooltipActive = false;
   }
+  
+  
 }

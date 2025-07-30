@@ -1,8 +1,19 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+
 public class PlayerInputHandler : MonoBehaviour
 {
+    
+    public enum GameDevice {
+
+        KeyboardMouse,
+        Gamepad,
+        
+    }
+
+    
     [Header("Input Action Asset")] 
   
     [SerializeField] private InputActionAsset playerControls;
@@ -22,7 +33,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private InputAction moveAction;
     private InputAction lookAction;
-    private InputAction selectAction;
+    public InputAction selectAction;
     private InputAction cameraPivotAction;
     private InputAction cameraZoomAction;
 
@@ -37,6 +48,17 @@ public class PlayerInputHandler : MonoBehaviour
 
     public static PlayerInputHandler instance;
 
+    private GameDevice activeGameDevice;
+    public event EventHandler OnGameDeviceChanged; 
+    
+    
+    public static class InputActionButtonExtensions
+    {
+        public static bool GetButton(InputAction action) => action.ReadValue<float>() > 0;
+        public static bool GetButtonDown(InputAction action) => action.triggered && action.ReadValue<float>() > 0;
+        public static bool GetButtonUp(InputAction action) => action.triggered && action.ReadValue<float>() == 0;
+    }
+    
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -52,6 +74,8 @@ public class PlayerInputHandler : MonoBehaviour
         FindActions();
         
         RegisterInputActions();
+
+        InputSystem.onActionChange += InputSystem_OnActionChange;
     }
 
 
@@ -108,8 +132,61 @@ public class PlayerInputHandler : MonoBehaviour
         cameraZoomAction.performed += callback => cameraZoomInputValue = callback.ReadValue<Vector2>();
         cameraZoomAction.canceled += callback => cameraZoomInputValue =  Vector2.zero;
     }
-    
+
+    private void InputSystem_OnActionChange(object arg1, InputActionChange inputActionChange)
+    {
+        //Checks to see if an input has been performed
+        if (inputActionChange == InputActionChange.ActionPerformed && arg1 is InputAction)
+        {
+            InputAction inputAction = arg1 as InputAction;
+
+            //if it is the virtual mouse return, as that is not an input device e.g. controller or keyboard
+            if (inputAction.activeControl.device.displayName == "VirtualMouse")
+            {
+                return;
+            }
+
+            if (inputAction.activeControl.device is Gamepad)
+            {
+                if (activeGameDevice != GameDevice.Gamepad)
+                {
+                    ChangeActiveGameDevice(GameDevice.Gamepad);
+                }
+            } 
+            else
+            {
+                if (activeGameDevice != GameDevice.KeyboardMouse)
+                {
+                    ChangeActiveGameDevice(GameDevice.KeyboardMouse);
+                }
+            }
+        
+            
+            //Room for expansion with other control devices
+        
+        }
+    }
+
+    private void ChangeActiveGameDevice(GameDevice activeGameDevice)
+    {
+        //updates script activeGameDevice to input game device
+        this.activeGameDevice = activeGameDevice;
+        
+        print("Active Game Device is now:" + activeGameDevice);
+        
+        OnGameDeviceChanged?.Invoke(this, EventArgs.Empty);
+
      
+
+        
+        
+    }
+
+
+    public GameDevice ReturnActiveGameDevice()
+    {
+        return activeGameDevice;
+    }
     
     
 }
