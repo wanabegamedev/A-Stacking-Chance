@@ -30,7 +30,7 @@ public class CameraPivot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      print(inputHandler.lookInputValue);
+      //sDebug.Log(inputHandler.cameraZoomInputValue);
         
         if (orbitActive)
         {
@@ -40,7 +40,7 @@ public class CameraPivot : MonoBehaviour
                
             }
             OrbitPoint();
-            orbitRadius -= inputHandler.cameraZoomInputValue.y * orbitSensitivity;
+            orbitRadius -= inputHandler.zoomInputRawValue.y * orbitSensitivity;
             orbitRadius = Mathf.Clamp(orbitRadius, minimumOrbitRadius, maximumOrbitRadius);
             
            
@@ -56,8 +56,8 @@ public class CameraPivot : MonoBehaviour
 
     void RotatePoint()
     {
-        var mouseX = inputHandler.lookInputValue.x;
-        var mouseY = inputHandler.lookInputValue.y;
+        var mouseX = inputHandler.lookInputRawValue.x;
+        var mouseY = inputHandler.lookInputRawValue.y;
 
 
         yaw += mouseX * orbitSensitivity;

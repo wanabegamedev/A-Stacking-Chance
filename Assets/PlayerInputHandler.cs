@@ -49,8 +49,11 @@ public class PlayerInputHandler : MonoBehaviour
     public static PlayerInputHandler instance;
 
     private GameDevice activeGameDevice;
-    public event EventHandler OnGameDeviceChanged; 
-    
+    public event EventHandler OnGameDeviceChanged;
+
+
+    public Vector2 lookInputRawValue;
+    public Vector2 zoomInputRawValue;
     
     public static class InputActionButtonExtensions
     {
@@ -78,6 +81,11 @@ public class PlayerInputHandler : MonoBehaviour
         InputSystem.onActionChange += InputSystem_OnActionChange;
     }
 
+    private void Update()
+    {
+        lookInputRawValue = lookAction.ReadValue<Vector2>();
+        zoomInputRawValue = cameraZoomAction.ReadValue<Vector2>();
+    }
 
     void FindActions()
     {

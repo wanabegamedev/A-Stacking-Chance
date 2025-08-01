@@ -438,7 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31630d64d0a114499467acd7b70d393, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  virtualMouseUI: {fileID: 810370932}
+  virtualMouseUI: {fileID: 1719893055}
 --- !u!4 &12729658
 Transform:
   m_ObjectHideFlags: 0
@@ -7045,7 +7045,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
+  m_Maskable: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7862,7 +7862,7 @@ MonoBehaviour:
   cameraPivot: CameraPivot
   cameraZoom: cameraZoom
   selectAction:
-    m_Name: 
+    m_Name: Select
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 578c5370-fade-43fd-acbf-3312807ab162
@@ -7870,6 +7870,8 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  lookInputRawValue: {x: 0, y: 0}
+  zoomInputRawValue: {x: 0, y: 0}
 --- !u!4 &1999096979
 Transform:
   m_ObjectHideFlags: 0
