@@ -8,6 +8,8 @@ public class VirtualMouseUI : MonoBehaviour
     [SerializeField] private RectTransform canvasRectTransform;
     private VirtualMouseInput virtualMouseInput;
     private PlayerInputHandler inputHandler;
+    
+    [SerializeField] private GameObject virtualMouseUI;
 
     private void Start()
     {
@@ -16,6 +18,8 @@ public class VirtualMouseUI : MonoBehaviour
         inputHandler = PlayerInputHandler.instance;
 
         inputHandler.OnGameDeviceChanged += PlayerInput_OnGameDeviceChanged;
+        
+        virtualMouseUI.SetActive(false);
     }
 
 
@@ -44,13 +48,13 @@ public class VirtualMouseUI : MonoBehaviour
         if (inputHandler.ReturnActiveGameDevice() == PlayerInputHandler.GameDevice.Gamepad)
         {
            
-            transform.GetChild(0).gameObject.SetActive(true);
+            virtualMouseUI.SetActive(true);
             Cursor.visible = false;
         }
         else
         {
-        
-            transform.GetChild(0).gameObject.SetActive(false);
+           
+            virtualMouseUI.SetActive(false);
             Cursor.visible = true;
         }
     }

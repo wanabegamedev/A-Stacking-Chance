@@ -141,6 +141,6 @@ public class UIManager : MonoBehaviour
         
         EventSystem.current.SetSelectedGameObject(endUICanvas.GetComponentInChildren<Button>().gameObject);
 
-        highscoreText.text = "High Score: " + manager.score;
+        highscoreText.text = "High Score: " + manager.highScore;
     }
 }

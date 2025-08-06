@@ -52,8 +52,7 @@ public class BlockMovement : MonoBehaviour
             {
                 if (block == null)
                 {
-                    print("Error: Block Does Not Exist");
-                    manager.DeselectAllBlocks();
+                    manager.DeselectChosenBlock(block);
                     return;
                 }
                 

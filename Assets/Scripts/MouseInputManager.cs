@@ -1,5 +1,4 @@
 using System;
-using Mono.Cecil;
 using UnityEngine;
 
 public class BlockHoverEventArgs : EventArgs
@@ -28,6 +27,7 @@ public class MouseInputManager : MonoBehaviour
     {
         inputHandler = PlayerInputHandler.instance;
         tooltip = FindAnyObjectByType<TooltipManager>();
+        
     }
     
 
@@ -106,7 +106,15 @@ public class MouseInputManager : MonoBehaviour
         }
         else
         {
+            try
+            {
                 tooltip.HideTooltip();
+            }
+            catch (Exception e)
+            {
+              print("Tool tip not found");
+            }
+                
         }
     }
 }

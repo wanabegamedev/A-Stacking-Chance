@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +17,8 @@ public class GameManager : MonoBehaviour
     public int turn = 0;
     
     public int score = 0;
+
+    public int highScore = 0;
     
     public int scoreMultiplier = 1;
     
@@ -34,6 +39,8 @@ public class GameManager : MonoBehaviour
 
    public bool inUpgradePhase;
 
+   
+   
 
    [Header("Audio Clips")] 
   
@@ -98,6 +105,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DeselectChosenBlock(Block b)
+    {
+        try
+        {
+            selectedBlocks.Remove(b);
+
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Error: Can't Remove Block!");
+        }
+       
+    }
+
     public void AddToMultiplier(int amount)
     {
 
@@ -156,6 +177,7 @@ public class GameManager : MonoBehaviour
 
     public void EndRound()
     {
+        highScore += score;
         score = 0;
         scoreUntilNextRound = scoreUntilNextRound * 2;
         
@@ -186,7 +208,7 @@ public class GameManager : MonoBehaviour
         
         generator.ResetTower();
         
-        generator.GenerateTower(10 * round);
+        generator.GenerateTower(5 * round);
         
         uiManager.HideUpgradeUI();
         Time.timeScale = 1;

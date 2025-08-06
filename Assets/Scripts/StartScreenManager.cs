@@ -18,7 +18,7 @@ public class StartScreenManager : MonoBehaviour
     void Start()
     {
         inputHandler = PlayerInputHandler.instance;
-        EventSystem.current.SetSelectedGameObject(startButton.gameObject);
+        //EventSystem.current.SetSelectedGameObject(startButton.gameObject);
     }
 
     // Update is called once per frame
@@ -33,6 +33,6 @@ public class StartScreenManager : MonoBehaviour
         {
             keyboardUI.SetActive(true);
             controllerUI.SetActive(false);
-        }
+        } 
     }
 }
