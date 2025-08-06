@@ -174,5 +174,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modifierName: Shrink
-  modifierDescription: Gets smaller every tun!
+  modifierDescription: Gets smaller every turn!
   shrinkScale: 0.9

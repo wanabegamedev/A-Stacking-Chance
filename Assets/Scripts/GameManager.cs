@@ -51,6 +51,10 @@ public class GameManager : MonoBehaviour
    [SerializeField] private AudioClip piecePullOutClp;
    
    [SerializeField] private AudioClip roundStartClip;
+   
+   [SerializeField] private AudioClip comboBlockDestroyClip;
+
+
 
 
  
@@ -132,6 +136,15 @@ public class GameManager : MonoBehaviour
 
         scoreMultiplier = 1;
 
+        
+        //Delete all blocks that are not out of the area once the combo timer is over
+
+        foreach (var block in selectedBlocks)
+        {
+            AudioManager.instance.PlaySound(comboBlockDestroyClip);
+            Destroy(block.gameObject);
+        }
+        
         //reset the selected blocks
         DeselectAllBlocks();
         selectedBlocks = new List<Block>();
@@ -168,7 +181,10 @@ public class GameManager : MonoBehaviour
 
 
     public void EndGame()
-    { AudioManager.instance.PlaySound(loseClip);
+    { 
+       // PlayerInputHandler.instance.RumblePulse(0.25f, 1f, 0.5f);
+        
+        AudioManager.instance.PlaySound(loseClip);
         print("Game Over");
         uiManager.ShowEndUI();
         Time.timeScale = 0;

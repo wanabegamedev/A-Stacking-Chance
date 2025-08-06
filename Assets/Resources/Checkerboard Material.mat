@@ -40,8 +40,8 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _tileScale: 2
-    - _tileSpeed: 0.51
+    - _tileScale: 14.3
+    - _tileSpeed: 0.01
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

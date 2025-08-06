@@ -64,6 +64,7 @@ public class MouseInputManager : MonoBehaviour
             if (hit.transform.TryGetComponent(out Block blockRef))
             {
                 blockRef.OnBlockClick();
+                inputHandler.RumblePulse(0.1f, 0.1f, 0.3f);
             }
             else
             {

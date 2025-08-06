@@ -37,44 +37,26 @@ public class TooltipManager : MonoBehaviour
     private string GenerateDescription(Block block)
     {
         string stringToReturn = "";
+        
 
-        stringToReturn += "Turn Start Modifiers:";
+        stringToReturn += ReturnModifiers("Turn Start Modifiers", block.onTurnStartModifierList);
+        
 
-        stringToReturn += EOL;
+        stringToReturn += ReturnModifiers("Move Modifiers", block.onMoveModifierList);
+        
 
-        stringToReturn += ReturnModifiers(block.onTurnStartModifierList);
+        stringToReturn += ReturnModifiers("Turn End Modifiers", block.onTurnEndModifierList);
         
-        stringToReturn += EOL;
+        stringToReturn += ReturnModifiers("On Remove Modifiers", block.onRemoveModifierList);
+        
+        
+        stringToReturn += ReturnModifiers("Other Modifiers", block.otherModifierList);
 
-        stringToReturn += "Move Modifiers:";
-        
-        stringToReturn += EOL;
-        
-        stringToReturn += ReturnModifiers(block.onMoveModifierList);
-        
-        stringToReturn += EOL;
 
-        stringToReturn += "Turn End Modifiers:";
-        
-        stringToReturn += EOL;
-        
-        stringToReturn += ReturnModifiers(block.onTurnEndModifierList);
-        
-        stringToReturn += EOL;
-
-        stringToReturn += "On Remove Modifiers:";
-        
-        stringToReturn += ReturnModifiers(block.onRemoveModifierList);
-        
-        stringToReturn += EOL;
-        
-        stringToReturn += "Other Modifiers:";
-        
-        stringToReturn += ReturnModifiers(block.otherModifierList);
-        
-        stringToReturn += EOL;
-        
-        
+        if (stringToReturn == "")
+        {
+            stringToReturn = "Just a regular block!";
+        }
         
         return stringToReturn;
         
@@ -82,11 +64,20 @@ public class TooltipManager : MonoBehaviour
      
     }
 
-    private string ReturnModifiers(List<BlockModifier> mods)
+    private string ReturnModifiers(string modifierListName, List<BlockModifier> mods)
     {
      
 
         string modifiersString = "";
+
+        if (mods.Count <= 0)
+        {
+            return "";
+        }
+        else
+        {
+            modifiersString += modifierListName + ": " + EOL;
+        }
         
         foreach (var mod in mods)
         {

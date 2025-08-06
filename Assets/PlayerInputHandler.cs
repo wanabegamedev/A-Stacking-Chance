@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -50,6 +51,8 @@ public class PlayerInputHandler : MonoBehaviour
 
     private GameDevice activeGameDevice;
     public event EventHandler OnGameDeviceChanged;
+
+    private Coroutine stopRumbleAfterTime;
 
 
     public Vector2 lookInputRawValue;
@@ -195,6 +198,39 @@ public class PlayerInputHandler : MonoBehaviour
     {
         return activeGameDevice;
     }
-    
+
+    public void RumblePulse(float lowFreq, float highFreq, float duration)
+    {
+        if (ReturnActiveGameDevice() != GameDevice.Gamepad)
+        {
+            return;
+        }
+        
+        Gamepad controller = Gamepad.current;
+        
+        
+        controller.SetMotorSpeeds(lowFreq, highFreq);
+
+        stopRumbleAfterTime = StartCoroutine(StopRumble(duration));
+
+
+
+    }
+
+    private IEnumerator StopRumble(float duration)
+    {
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        if (ReturnActiveGameDevice() == GameDevice.Gamepad)
+        {
+            Gamepad.current.SetMotorSpeeds(0f, 0f);
+        }
+    }
     
 }
