@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Tweens;
 
 public class PointBoundary : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PointBoundary : MonoBehaviour
     public int gracePeriodScoreHolder = 0;
 
     [SerializeField] private AudioClip onPieceRemoveClip;
+
+    [SerializeField] private float endScaleTime = 2;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -50,6 +53,8 @@ public class PointBoundary : MonoBehaviour
 
 
             manager.selectedBlocks.Remove(firstBlock);
+            
+            
             Destroy(firstBlock.gameObject);
            
         }
@@ -65,10 +70,26 @@ public class PointBoundary : MonoBehaviour
             gracePeriodScoreHolder += otherBlock.blockScoreValue;
             
             manager.selectedBlocks.Remove(otherBlock);
-            Destroy(otherBlock.gameObject);
+
+            other.transform.GetComponent<Rigidbody>().useGravity = false;
+
+            var scaleTween = new LocalScaleTween
+            {
+                to = new Vector3(0, 0, 0),
+                duration = 2,
+                onEnd = (instance) =>
+                {
+                    Destroy(otherBlock.gameObject);
+                }
+            };
+
+            otherBlock.gameObject.AddTween(scaleTween);
+
+
         }
       
     }
+
 
 
     IEnumerator StartPieceRemovalGracePeriod()
